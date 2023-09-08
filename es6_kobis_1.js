@@ -1,15 +1,16 @@
-function exKobis () {
+function exKobis(date) {
 
   // 콜백함수(fetch)를 통해 가져온 json 객체데이터들은 해당 함수 안에서만 사용가능
-  fetch('http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=20120101')
-  .then( (response) => response.json())
-  .then( kobis => { // 앞서 받은 결과 데이터를 받아옴
+  fetch(`http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=${date}`)
+    .then((response) => response.json())
+    .then(kobis => { // 앞서 받은 결과 데이터를 받아옴
 
-    // 일별 박스오피스 출력 boxofficeType - 순위 rank, 영화제목 movieNm, 개봉일 openDt, 누적관객수 audiAcc, 누적매출액 salesAcc
-    let showKobis = kobis.boxOfficeResult;
-    let showKobisRankList = kobis.boxOfficeResult.dailyBoxOfficeList;
+      // 일별 박스오피스 출력 boxofficeType - 순위 rank, 영화제목 movieNm, 개봉일 openDt, 누적관객수 audiAcc, 누적매출액 salesAcc
+      let showKobis = kobis.boxOfficeResult;
 
-    const movieList = `
+      let showKobisRankList = kobis.boxOfficeResult.dailyBoxOfficeList;
+
+      const movieList = `
       <ul>
         <li>박스오피스 타입 - ${showKobis.boxofficeType}</li>
         <li>일자 - ${showKobis.showRange}</li>
@@ -22,7 +23,7 @@ function exKobis () {
           <td>누적관객수</td>
           <td>누적매출액</td>
         </tr>
-      ${showKobisRankList.map(movie => 
+      ${showKobisRankList.map(movie =>
         `<tr>
           <td>${movie.rank}등</td> 
           <td>${movie.movieNm}</td> 
@@ -33,23 +34,24 @@ function exKobis () {
       ).join("\n")}
       </table>
     `
-    document.querySelector('#kobisContent').innerHTML = movieList
+      document.querySelector('#kobisContent').innerHTML = movieList
 
-  })
+    })
 
 }
-
-function click () {
-  document.querySelector("#search").addEventListener('click', e => {
-    exKobis()
-  
-    let searchInput = document.querySelector("#searchData").length
-  
-    if(searchInput === movie.openDt);
-  })
-}
-
 
 // DOM 객체 생성 후 exKobis 함수
-document.addEventListener("DOMContentLoaded", exKobis)
+document.addEventListener("DOMContentLoaded", () => {
+
+  exKobis('20230907')
+
+  document.querySelector('#search').addEventListener('click', e => {
+
+    let searchInput = document.querySelector("#searchData").value
+  
+    exKobis(searchInput)
+  
+  })
+
+})
 
