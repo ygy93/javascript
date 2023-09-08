@@ -21,9 +21,9 @@ const car = {
   year : "2010",
 };
 
-for(const prop of Object.keys(car)){
+for(const prop of Object.keys(car)){ // Object.keys 는 객체를 배열로 반환시켜줌
   const value = car[prop];
-  console.log(prop, value);
+  console.log(car[0], value);
 }
 
 /* for(const prop in car){
