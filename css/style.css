@@ -1,0 +1,24 @@
+.join fieldset {
+  border:1px solid #000;
+  padding: 20px 10px;
+  font-weight: 600;
+}
+
+.join fieldset legend {
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.join div {
+  margin-bottom: 20px;
+}
+
+.join div i {
+  font-weight: 500;
+  color:blue;
+  font-size: 0.8em;
+}
+
+.join .btns {
+  text-align: center;
+}
