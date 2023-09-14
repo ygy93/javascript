@@ -4,8 +4,9 @@ function form_check(e) {
   let pw = document.querySelector('#pw');
   let pwCheck = document.querySelector('#pwCheck');
   let birth = document.querySelector('#birth');
-  let email_sel = document.querySelector('#email_sel'); // 셀렉트
+  let email_self = document.querySelector('#email_self');
   let email_dns = document.querySelector('#email_dns');
+  let email_sel = document.querySelector('#email_sel'); // 셀렉트
   let tel = document.querySelector('#telNumber');
   let checkBox = document.querySelector('#check');
 
@@ -100,11 +101,32 @@ function form_check(e) {
     document.querySelector('.err_birth').textContent = '';
   }
 
-  /* 이메일 셀렉트 밸류값 가져와서 뒤에 input 채우기 -------------------------------------- */
+  /* 우편번호 주소 입력 -------------------------------- */
+  let postNum = document.querySelector('#postCode'); // 우편번호
+  let addr1 = document.querySelector('#addr'); // 주소
+  let addr2 = document.querySelector('#addr2'); // 도로명주소
+
+  if(postNum.value == '' || addr1.value == ''){
+    alert('주소를 입력해주세요!!');
+    postCode.focus();
+
+    return false;
+  } else if (addr2.value == ''){
+    alert('상세주소를 마저 입력해주세요!!');
+    addr2.focus();
+
+    return false;
+  }
+
+  /* 이메일  -------------------------------------- */
   if(email_dns.value == '' && email_sel.value == 'self'){
     alert('이메일 주소를 입력해주세요!!');
-    textColor();
     email_dns.focus();
+
+    return false;
+  } else if (email_self.value == '') {
+    alert('자신의 이메일 명을 입력해주세요.')
+    email_self.focus();
 
     return false;
   }
@@ -113,6 +135,13 @@ function form_check(e) {
   if((tel.value).includes('-')){
     var err_text = document.querySelector('.err_tel');
     err_text.textContent = '* - 없이 입력해주세요.';
+    textColor();
+    tel.focus();
+
+    return false;
+  } else if(tel.value.length < 10 || tel.value.length > 11) {
+    var err_text = document.querySelector('.err_tel');
+    err_text.textContent = '* 양식에 맞는지 재확인해주세요.';
     textColor();
     tel.focus();
 
@@ -136,7 +165,7 @@ function form_check(e) {
   
 }
 
-/* 이메일 직접입력, 네이버 등등 바로 적용 */
+/* 이메일 직접입력, 네이버 등등 바로 적용 셀렉트 밸류값 가져와서 뒤에 input 채우기 */
 function email_check() {
   let email_sel = document.querySelector('#email_sel');
   let email_dns = document.querySelector('#email_dns');
@@ -160,8 +189,7 @@ function post_check() {
 
       postNum.value = data.zonecode;
       addr1.value = data.address;
-      addr2.value = data.roadAddress;
-      
+      addr2.focus()
     }
   }).open();
 }
