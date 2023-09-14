@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./css/style.css">
   <script src="./js/script.js" type="module"></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <title>Document</title>
 </head>
 <body>
@@ -47,13 +48,15 @@
         </div>
         <div>
           <label for="addrSearch">주소 검색</label> 
-          <input type="number" placeholder="우편번호" id="addrSearch" name="addrSearch" required> 
-          <button type="button">주소검색</button><br>
-          <label for="addr">주소</label> <input type="text" placeholder="기본주소" id="addr" name="addr" required> <input type="text" placeholder="상세주소" name="addr" required>
+          <input type="number" placeholder="우편번호" id="postCode" name="addrSearch" required> 
+          <button type="button" id="addrSearch">주소검색</button><br>
+          <label for="addr">주소</label> 
+          <input type="text" placeholder="기본주소" id="addr" name="addr" required> 
+          <input type="text" placeholder="상세주소" id="addr2" name="addr" required>
         </div>
         <div>
           <label for="email">이메일</label> 
-          <input type="text" name="email_sel" required> @ 
+          <input type="text" name="email_self" required> @ 
           <input type="email" name="email_dns" required id="email_dns"> 
           <select id="email_sel">
             <option value="self" label="직접 입력"></option>
